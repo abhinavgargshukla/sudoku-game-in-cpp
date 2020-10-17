@@ -13,6 +13,34 @@ void random()
 {
     srand((unsigned)time(0));
 }
+// Interchange
+
+void interchange(int (*a)[9],int (*q)[9])
+{
+    int arr[9],i,j;
+    for(i=0;i<9;i++)
+    {
+        do
+        {
+            arr[i]=rand()%9+1;
+            for(j=0;j<i;j++)
+            {
+                if(arr[i]==arr[j])
+                    break;
+            }
+        }while(j!=i);
+    }
+     for(i=0;i<9;i++)
+     {
+         for(int j=0;j<9;j++)
+         {
+             a[i][j]=arr[a[i][j]-1];
+             if(q[i][j]!=0)
+                q[i][j]=a[i][j];
+         }
+     }
+	return;
+}
 //for rows exchange within its set of three
 void row(int (*a)[9],int (*q)[9])
 {
@@ -203,6 +231,7 @@ int main(void)
     //-----------------------------------------------------PROCESSING---------------------------------------------------------
      for( j=0;j<10000;j++)
       {
+      interchange(a,q);
       row(a,q);
       col(a,q);
       rows3(a,q);
